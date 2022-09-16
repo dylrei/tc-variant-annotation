@@ -7,7 +7,6 @@ def validate_sys_argv(args):
                            f'\tannotate-variants input_file_path.txt output_file_path.tsv')
 
 
-
 def validate_api_response(response):
     if not response.ok:
         raise RuntimeError(f'Response ({response.status_code}): {response.text}')
