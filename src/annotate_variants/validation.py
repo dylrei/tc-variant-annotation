@@ -1,19 +1,11 @@
 import os
 
 
-def load_variants(input_path):
-    _validate_path(input_path, 'r')
-    with open(input_path, 'r') as file_handle:
-        contents = file_handle.readlines()
-        if not contents:
-            raise RuntimeError(f'Specified input file {input_path} is empty')
-        return contents
+def validate_sys_argv(args):
+    if len(args) != 3:
+        raise RuntimeError(f'Wrong number of arguments; Example invocation:\n'
+                           f'\tannotate-variants input_file_path.txt output_file_path.tsv')
 
-
-def load_output_file(output_path):
-    _validate_path(output_path, 'w')
-    with open(output_path, 'w') as file_handle:
-        return file_handle
 
 
 def validate_api_response(response):
@@ -21,7 +13,7 @@ def validate_api_response(response):
         raise RuntimeError(f'Response ({response.status_code}): {response.text}')
 
 
-def _validate_path(path, mode):
+def validate_path(path, mode):
     file_exists = os.path.exists(path)
     if mode == 'r':
         if not file_exists:
